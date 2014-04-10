@@ -1,0 +1,19 @@
+{
+  "name": "greglearns-helper",
+  "version": "0.0.1",
+  "description": "Helper functions, greglearns-style",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/greglearns/node-greglearns-helper.git"
+  },
+  "author": "greglearns",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greglearns/node-greglearns-helper/issues"
+  },
+  "homepage": "https://github.com/greglearns/node-greglearns-helper"
+}
