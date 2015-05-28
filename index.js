@@ -13,6 +13,8 @@ var exports = {
   asyncCatch: asyncCatch,
   show: show,
   tap: tap,
+  clone: clone,
+  onKeys: onKeys,
   merge: merge
 }
 
@@ -51,6 +53,7 @@ function tap(obj) {
 }
 
 function merge(base) {
+  // Last object wins: Fields in the arguments on the right overwrite object keys on the left
   if (!base) { return {} }
   return Array.prototype.slice.call(arguments).reduce(mergeOne)
   function mergeOne(to, from) {
@@ -63,4 +66,8 @@ function onKeys(o, fn) {
   Object.keys(o).forEach(function(key, index) {
     fn(key, o[key], index)
   })
+}
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj))
 }
