@@ -14,6 +14,7 @@ var exports = {
   show: show,
   tap: tap,
   clone: clone,
+  tryJSON: tryJSON,
   onKeys: onKeys,
   merge: merge
 }
@@ -70,4 +71,9 @@ function onKeys(o, fn) {
 
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj))
+}
+
+function tryJSON(thing) {
+  try{ return JSON.parse(thing)
+  } catch(e) { return thing }
 }
