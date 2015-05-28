@@ -59,3 +59,8 @@ function merge(base) {
   }
 }
 
+function onKeys(o, fn) {
+  Object.keys(o).forEach(function(key, index) {
+    fn(key, o[key], index)
+  })
+}
