@@ -16,8 +16,11 @@ var exports = {
   clone: clone,
   tryJSON: tryJSON,
   onKeys: onKeys,
+  Object_values: Object_values,
+  forEachKey: forEachKey,
+  helpWithOverrides: helpWithOverrides,
   merge: merge
-}
+}f
 
 module.exports = exports
 
@@ -30,6 +33,17 @@ function asyncCatch(fn, cb) {
       cb(e)
     }
   }
+}
+
+function forEachKey(obj, cb) {
+  Object.keys(obj).map(function(key){ return obj[key] }).forEach(function(x) { cb(x) })
+}
+
+function helpWithOverrides() {
+  // Useful if you have multiple helpers in a project
+  var helpWithOverrides = {}
+  helpWithOverrides.__proto__ = exports
+  return helpWithOverrides
 }
 
 function show() {
@@ -63,10 +77,15 @@ function merge(base) {
   }
 }
 
+
 function onKeys(o, fn) {
-  Object.keys(o).forEach(function(key, index) {
-    fn(key, o[key], index)
+  return Object.keys(o).map(function(key, index) {
+    return fn(key, o[key], index)
   })
+}
+
+function Object_values(obj) {
+  return Object.keys(obj).map(function(key) { return obj[key] })
 }
 
 function clone(obj) {
