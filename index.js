@@ -20,7 +20,7 @@ var exports = {
   forEachKey: forEachKey,
   helpWithOverrides: helpWithOverrides,
   merge: merge
-}f
+}
 
 module.exports = exports
 
