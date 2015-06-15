@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/greglearns/node-greglearns-helper/issues"
   },
-  "homepage": "https://github.com/greglearns/node-greglearns-helper"
+  "homepage": "https://github.com/greglearns/node-greglearns-helper",
+  "dependencies": {
+    "eyespect": "^0.1.10"
+  }
 }
