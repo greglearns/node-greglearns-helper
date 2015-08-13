@@ -19,6 +19,8 @@ var exports = {
   Object_values: Object_values,
   forEachKey: forEachKey,
   helpWithOverrides: helpWithOverrides,
+  get: get,
+  set: set,
   merge: merge
 }
 
@@ -95,4 +97,31 @@ function clone(obj) {
 function tryJSON(thing) {
   try{ return JSON.parse(thing)
   } catch(e) { return thing }
+}
+
+function set(obj, path, value) {
+  var key = path[path.length-1]
+  for (var i=0, len=path.length-1; i< len; ++i) {
+    var part = path[i]
+    if ( !obj.hasOwnProperty(part) ) { obj[part] = {} }
+    obj = obj[part]
+  }
+  obj[key] = value
+}
+
+function get(obj, path, defaultValue, ifNotExistValue) {
+  var lastPart = path[ path.length-1 ]
+  for(i=0, len=path.length - 1; i<len; ++i) {
+    var part = path[i]
+    if (!obj.hasOwnProperty(part)) { return ifNotExistValue }
+    obj = obj[part]
+  }
+  if (lastPart === '*') {
+    obj = clone(obj)
+    return obj
+  } else {
+    if (!obj.hasOwnProperty(lastPart)) { return ifNotExistValue }
+    obj = defaultValue !== undefined ? obj[lastPart] || defaultValue : obj[lastPart]
+  }
+  return obj
 }
