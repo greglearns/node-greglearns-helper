@@ -21,6 +21,7 @@ var exports = {
   helpWithOverrides: helpWithOverrides,
   get: get,
   set: set,
+  del: del,
   merge: merge
 }
 
@@ -100,6 +101,7 @@ function tryJSON(thing) {
 }
 
 function set(obj, path, value) {
+  if (!path || !path.length) { throw new Error('path requires at least one path part') }
   var key = path[path.length-1]
   for (var i=0, len=path.length-1; i< len; ++i) {
     var part = path[i]
@@ -110,6 +112,7 @@ function set(obj, path, value) {
 }
 
 function get(obj, path, defaultValue, ifNotExistValue) {
+  if (!path || !path.length) { return obj }
   var lastPart = path[ path.length-1 ]
   for(i=0, len=path.length - 1; i<len; ++i) {
     var part = path[i]
@@ -125,3 +128,17 @@ function get(obj, path, defaultValue, ifNotExistValue) {
   }
   return obj
 }
+
+function del(obj, path) {
+  if (!path || !path.length) { return }
+  var parentPath = clone(path)
+  var lastPart = parentPath.pop()
+  var val = get(obj, parentPath)
+  if (val) {
+    delete val[lastPart]
+    if (!Object.keys(val).length) {
+      del(obj, parentPath)
+    }
+  }
+}
+
