@@ -20,7 +20,6 @@ describe('object get/set helper function', function() {
 
   describe('get', function() {
 
-
     it('can get a value', function() {
       var obj = {}
       subject.set(obj, [ 'some', 'path' ], 42)
@@ -30,8 +29,15 @@ describe('object get/set helper function', function() {
     it('can get a value at the root', function() {
       var obj = {}
       subject.set(obj, [ 'some', 'path' ], 42)
+      expect( subject.get(obj, [ 'some' ]) ).to.eql({ path: 42 })
+    })
+
+    it('can get the root', function() {
+      var obj = {}
+      subject.set(obj, [ 'some', 'path' ], 42)
       expect( subject.get(obj, [ ]) ).to.eql({ some: { path: 42 } })
     })
+
   })
 
   describe('del', function() {
