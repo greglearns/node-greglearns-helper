@@ -1,6 +1,6 @@
 {
   "name": "greglearns-helper",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Helper functions, greglearns-style",
   "main": "index.js",
   "scripts": {
