@@ -22,6 +22,7 @@ var exports = {
   get: get,
   set: set,
   del: del,
+  mergeClone: mergeClone,
   merge: merge
 }
 
@@ -74,6 +75,18 @@ function merge(base) {
   // Last object wins: Fields in the arguments on the right overwrite object keys on the left
   if (!base) { return {} }
   return Array.prototype.slice.call(arguments).reduce(mergeOne)
+  function mergeOne(to, from) {
+    Object.keys(from).forEach(function(attr) { to[attr] = from[attr] })
+    return to
+  }
+}
+
+function mergeClone(base) {
+  // Last object wins: Fields in the arguments on the right overwrite object keys on the left
+  if (!base) { return {} }
+  var list = Array.prototype.slice.call(arguments)
+  list[0] = clone(list[0])
+  return list.reduce(mergeOne)
   function mergeOne(to, from) {
     Object.keys(from).forEach(function(attr) { to[attr] = from[attr] })
     return to
