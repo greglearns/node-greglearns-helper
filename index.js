@@ -125,6 +125,7 @@ function set(obj, path, value) {
 }
 
 function get(obj, path, defaultValue, ifNotExistValue) {
+  if (!obj) { return ifNotExistValue }
   if (!path || !path.length) { return obj }
   var lastPart = path[ path.length-1 ]
   for(i=0, len=path.length - 1; i<len; ++i) {
