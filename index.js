@@ -124,7 +124,7 @@ function set(obj, path, value) {
   obj[key] = value
 }
 
-function get(obj, path, defaultValue, ifNotExistValue) {
+function get(obj, path, ifNotExistValue, defaultValue) {
   if (!obj) { return ifNotExistValue }
   if (!path || !path.length) { return obj }
   var lastPart = path[ path.length-1 ]
@@ -132,14 +132,10 @@ function get(obj, path, defaultValue, ifNotExistValue) {
     var part = path[i]
     if (!obj.hasOwnProperty(part)) { return ifNotExistValue }
     obj = obj[part]
+    if (obj === undefined) { return ifNotExistValue }
   }
-  if (lastPart === '*') {
-    obj = clone(obj)
-    return obj
-  } else {
-    if (!obj.hasOwnProperty(lastPart)) { return ifNotExistValue }
-    obj = defaultValue !== undefined ? obj[lastPart] || defaultValue : obj[lastPart]
-  }
+  if (!obj.hasOwnProperty(lastPart)) { return ifNotExistValue }
+  obj = defaultValue !== undefined ? obj[lastPart] || defaultValue : obj[lastPart]
   return obj
 }
 
