@@ -130,7 +130,7 @@ function get(obj, path, ifNotExistValue, defaultValue) {
   var lastPart = path[ path.length-1 ]
   for(i=0, len=path.length - 1; i<len; ++i) {
     var part = path[i]
-    if (!obj.hasOwnProperty(part)) { return ifNotExistValue }
+    if (!obj || !obj.hasOwnProperty(part)) { return ifNotExistValue }
     obj = obj[part]
     if (obj === undefined) { return ifNotExistValue }
   }
